@@ -4715,7 +4715,7 @@ $options = [
 								'label' => esc_html__( 'Desktop', 'oceanwp' ),
 								'attr' => [
 									'transport' => 'postMessage',
-									'default'   => 36,
+									'default'   => owp_shop_result_count_cap_max_default(),
 								],
 							]
 						]
