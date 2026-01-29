@@ -79,7 +79,7 @@ if ( ! empty( $_GET ) ) {
 
 <ul class="result-count">
 	<li class="view-title"><?php esc_html_e( 'View:', 'oceanwp' ); ?></li>
-	<li><a class="view-first<?php if ( $requested_view === $num_prod_x1 ) echo ' active'; ?>" href="<?php echo esc_url( add_query_arg( 'products-per-page', $num_prod_x1, $link ) ); ?>"><?php echo esc_html( $num_prod_x1 ); ?></a></li>
-	<li><a class="view-second<?php if ( (int)$requested_view === $num_prod_x2 ) echo ' active'; ?>" href="<?php echo esc_url( add_query_arg( 'products-per-page', $num_prod_x2, $link ) ); ?>"><?php echo esc_html( $num_prod_x2 ); ?></a></li>
-	<li><a class="view-all<?php if ( $requested_view === 'all' ) echo ' active'; ?>" href="<?php echo esc_url( add_query_arg( 'products-per-page', 'all', $link ) ); ?>"><?php esc_html_e( 'All', 'oceanwp' ); ?></a></li>
+	<li><a class="view-first<?php if ( $requested_view === $num_prod_x1 ) echo ' active'; ?>" href="<?php echo esc_url( add_query_arg( 'products-per-page', $num_prod_x1, $link ) ); ?>" rel="nofollow"><?php echo esc_html( $num_prod_x1 ); ?></a></li>
+	<li><a class="view-second<?php if ( (int)$requested_view === $num_prod_x2 ) echo ' active'; ?>" href="<?php echo esc_url( add_query_arg( 'products-per-page', $num_prod_x2, $link ) ); ?>" rel="nofollow"><?php echo esc_html( $num_prod_x2 ); ?></a></li>
+	<li><a class="view-all<?php if ( $requested_view === 'all' ) echo ' active'; ?>" href="<?php echo esc_url( add_query_arg( 'products-per-page', 'all', $link ) ); ?>" rel="nofollow"><?php esc_html_e( 'All', 'oceanwp' ); ?></a></li>
 </ul>
