@@ -1127,7 +1127,7 @@ if ( ! class_exists( 'OceanWP_WooCommerce_Config' ) ) {
 			$shop_columns = absint( get_theme_mod( 'ocean_woocommerce_shop_columns', 3 ) );
 
 			if ( $max_cap < $shop_columns ) {
-				$max_cap = $shop_columns;
+				$max_cap = $default_count * 3;
 			}
 
 			$posts_per_page = $default_count;
