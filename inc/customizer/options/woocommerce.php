@@ -4695,6 +4695,33 @@ $options = [
 						'sanitize_callback' => 'oceanwp_sanitize_checkbox',
 					],
 
+					'ocean_woo_shop_result_count_max_cap' => [
+						'label'    => esc_html__( 'Shop Result Count Max Cap', 'oceanwp' ),
+						'desc'     => __('Limits the number of products shown per page when the "All" display option is active. Use this to maintain fast performance and prevent high server load on large shops. We recommend a value of 100 or lower.', 'oceanwp'),
+						'type'     => 'ocean-range-slider',
+						'section'  => 'ocean_woocommerce_archives_toolbar_section',
+						'transport' => 'refresh',
+						'priority' => 10,
+						'hideLabel'    => false,
+						'isUnit'       => false,
+						'isResponsive' => false,
+						'min'          => 1,
+						'max'          => 1200,
+						'step'         => 1,
+						'sanitize_callback' => 'oceanwp_sanitize_number_blank',
+						'active_callback' => 'oceanwp_cac_is_woo_shop_result_count_enabled',
+						'setting_args' => [
+							'desktop' => [
+								'id' => 'ocean_woo_shop_result_count_max_cap',
+								'label' => esc_html__( 'Desktop', 'oceanwp' ),
+								'attr' => [
+									'transport' => 'postMessage',
+									'default'   => owp_shop_result_count_cap_max_default(),
+								],
+							]
+						]
+					],
+
 					'ocean_divider_after_woo_shop_result_count_settings' => [
 						'type' => 'ocean-divider',
 						'section' => 'ocean_woocommerce_archives_toolbar_section',
