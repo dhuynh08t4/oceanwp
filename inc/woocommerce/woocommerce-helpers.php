@@ -415,34 +415,16 @@ if ( ! function_exists( 'owp_yith_wishlist_browse_button_label' ) ) {
 	}
 }
 
-if ( ! function_exists( 'owp_shop_result_count_cap_max_default') ) {
-	/**
-	 * Get Shop Result Count Max Cap Default
-	 *
-	 * @return int
-	 * @since 4.1.5
-	 */
-	function owp_shop_result_count_cap_max_default() {
-
-		$installed_version = get_option( 'oceanwp_theme_installed_version' );
-
-		if ( empty( $installed_version ) || ! is_string( $installed_version ) ) {
-			return apply_filters( 'oceanwp_shop_result_count_max_cap_default', 100 );
-		}
-
-		if ( version_compare( $installed_version, '4.1.5', '<' ) ) {
-			return apply_filters( 'oceanwp_shop_result_count_max_cap_default', 100 );
-		}
-
-		return apply_filters( 'oceanwp_shop_result_count_max_cap_default', 36 );
-	}
-}
-
 /**
  * Get shop result max cap.
  */
 if ( ! function_exists( 'oceanwp_get_shop_result_max_cap') ) {
-
+	/**
+	 * Get Shop Result Count Max Cap
+	 *
+	 * @return int
+	 * @since 4.1.5
+	 */
 	function oceanwp_get_shop_result_max_cap() {
 
 		$default = owp_shop_result_count_cap_max_default();
