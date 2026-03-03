@@ -51,7 +51,7 @@ class OceanWP_Breadcrumb_Trail {
  * This function is still used by various hooks in the theme.
  */
 function oceanwp_breadcrumbs_sources( $options ) {
-	return OceanWP_Breadcrumbs_Manager::instance()->get_sources( $options );
+	return OceanWP_Breadcrumbs_Compatibility::instance()->get_sources( $options );
 }
 add_filter( 'oceanwp_breadcrumbs_source_list', 'oceanwp_breadcrumbs_sources' );
 
@@ -59,7 +59,7 @@ add_filter( 'oceanwp_breadcrumbs_source_list', 'oceanwp_breadcrumbs_sources' );
  * Add container to SEOPRess breadcrumbs.
  */
 function sp_breadcrumbs_before() {
-	OceanWP_Breadcrumbs_Manager::instance()->sp_before();
+	OceanWP_Breadcrumbs_Compatibility::instance()->sp_before();
 }
 add_action( 'seopress_breadcrumbs_before_html', 'sp_breadcrumbs_before' );
 
@@ -67,7 +67,7 @@ add_action( 'seopress_breadcrumbs_before_html', 'sp_breadcrumbs_before' );
  * Div closed
  */
 function sp_breadcrumbs_after() {
-	OceanWP_Breadcrumbs_Manager::instance()->sp_after();
+	OceanWP_Breadcrumbs_Compatibility::instance()->sp_after();
 }
 add_action( 'seopress_breadcrumbs_after_html', 'sp_breadcrumbs_after' );
 
@@ -75,7 +75,7 @@ add_action( 'seopress_breadcrumbs_after_html', 'sp_breadcrumbs_after' );
  * Add container to Rank Math breadcrumbs.
  */
 function rm_breadcrumbs( $args ) {
-	return OceanWP_Breadcrumbs_Manager::instance()->rm_args( $args );
+	return OceanWP_Breadcrumbs_Compatibility::instance()->rm_args( $args );
 }
 add_action( 'rank_math/frontend/breadcrumb/args', 'rm_breadcrumbs' );
 
@@ -83,6 +83,6 @@ add_action( 'rank_math/frontend/breadcrumb/args', 'rm_breadcrumbs' );
  * Add container to WooCommerce breadcrumbs.
  */
 function owp_woo_breadcrumbs( $args ) {
-	return OceanWP_Breadcrumbs_Manager::instance()->woo_defaults( $args );
+	return OceanWP_Breadcrumbs_Compatibility::instance()->woo_defaults( $args );
 }
 add_filter( 'woocommerce_breadcrumb_defaults', 'owp_woo_breadcrumbs' );
