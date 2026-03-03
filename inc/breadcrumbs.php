@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Load the Manager from the new core location.
 require_once OCEANWP_THEME_DIR . '/inc/core/breadcrumbs/class-breadcrumbs-manager.php';
+require_once OCEANWP_THEME_DIR . '/inc/core/breadcrumbs/class-breadcrumbs-compatibility.php';
 
 /**
  * Shows a breadcrumb for all types of pages.
