@@ -238,4 +238,91 @@ class OceanWP_Breadcrumbs_Manager {
 
 		return $home_crumbs;
 	}
+
+	/**
+	 * Get breadcrumb sources.
+	 *
+	 * @param array $options Sources.
+	 * @return array
+	 */
+	public function get_sources( $options ) {
+		$is_enable  = is_callable( 'WPSEO_Options::get' ) ? WPSEO_Options::get( 'breadcrumbs-enable' ) : false;
+		$wpseo_data = get_option( 'wpseo_internallinks' ) ? get_option( 'wpseo_internallinks' ) : $is_enable;
+		if ( ! is_array( $wpseo_data ) ) {
+			$wpseo_data = array(
+				'breadcrumbs-enable' => $is_enable,
+			);
+		}
+
+		if ( function_exists( 'yoast_breadcrumb' ) && true === $wpseo_data['breadcrumbs-enable'] ) {
+			$options['yoast-seo'] = 'Yoast SEO Breadcrumbs';
+		}
+
+		if ( function_exists( 'seopress_display_breadcrumbs' ) ) {
+			$options['seopress'] = 'SEOPress';
+		}
+
+		if ( function_exists( 'rank_math_the_breadcrumbs' ) && class_exists( 'RankMath\Helper' ) && RankMath\Helper::get_settings( 'general.breadcrumbs' ) ) {
+			$options['rank-math'] = 'Rank Math';
+		}
+
+		return $options;
+	}
+
+	/**
+	 * SEOPress before HTML.
+	 */
+	public function sp_before() {
+		$classes = 'site-breadcrumbs clr';
+		if ( $breadcrumbs_position = get_theme_mod( 'ocean_breadcrumbs_position' ) ) {
+			$classes .= ' position-' . $breadcrumbs_position;
+		}
+
+		echo '<div class="' . esc_attr( $classes ) . '">';
+	}
+
+	/**
+	 * SEOPress after HTML.
+	 */
+	public function sp_after() {
+		echo '</div>';
+	}
+
+	/**
+	 * Rank Math breadcrumb args.
+	 *
+	 * @param array $args Args.
+	 * @return array
+	 */
+	public function rm_args( $args ) {
+		$classes = 'site-breadcrumbs clr';
+		if ( $breadcrumbs_position = get_theme_mod( 'ocean_breadcrumbs_position' ) ) {
+			$classes .= ' position-' . $breadcrumbs_position;
+		}
+		$args['wrap_before'] = '<div class="' . $classes . '">';
+		$args['wrap_after']  = '</div>';
+		return $args;
+	}
+
+	/**
+	 * WooCommerce breadcrumb defaults.
+	 *
+	 * @param array $args Args.
+	 * @return array
+	 */
+	public function woo_defaults( $args ) {
+		$classes = 'site-breadcrumbs woocommerce-breadcrumbs clr';
+		if ( $breadcrumbs_position = get_theme_mod( 'ocean_breadcrumbs_position' ) ) {
+			$classes .= ' position-' . $breadcrumbs_position;
+		}
+
+		$separator = apply_filters( 'oceanwp_breadcrumb_separator', get_theme_mod( 'ocean_breadcrumb_separator', '>' ) );
+		$separator = '<span class="breadcrumb-sep">' . $separator . '</span>';
+
+		$args['wrap_before'] = '<div class="' . $classes . '">';
+		$args['wrap_after']  = '</div>';
+		$args['delimiter']   = $separator;
+
+		return $args;
+	}
 }
