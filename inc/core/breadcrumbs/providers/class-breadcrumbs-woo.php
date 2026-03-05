@@ -35,6 +35,7 @@ class OceanWP_Breadcrumbs_WooCommerce_Provider extends OceanWP_Breadcrumbs_Provi
 				if ( 'shop' === $products_tax ) {
 					$this->add_shop_link();
 				} elseif ( 'product_cat' === $products_tax || 'product_tag' === $products_tax ) {
+					$this->add_shop_link();
 					$terms = wc_get_product_terms(
 						get_the_ID(),
 						$products_tax,
@@ -49,10 +50,11 @@ class OceanWP_Breadcrumbs_WooCommerce_Provider extends OceanWP_Breadcrumbs_Provi
 
 					if ( $terms ) {
 						$main_term = apply_filters( 'woocommerce_breadcrumb_main_term', $terms[0], $terms );
-						$this->add_term_parents( $main_term->term_id, $products_tax );
+						$this->add_term_parents( $main_term->parent, $products_tax );
 						$this->add_crumb( $main_term->name, get_term_link( $main_term ) );
 					}
 				} else {
+					$this->add_shop_link();
 					$this->add_post_terms( get_the_ID(), $products_tax );
 				}
 			}
